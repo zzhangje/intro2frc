@@ -1,0 +1,83 @@
+.team-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin: 2rem 0;
+}
+
+.team-member {
+    text-align: center;
+    width: 32%;
+    /* margin-bottom: 1.5rem; */
+}
+
+.team-member img {
+    height: 90px;
+    width: 90px;
+    object-fit: contain;
+    /* margin: 10px auto; */
+    border-radius: 8px;
+}
+
+.team-member h4 {
+    margin: 0rem 0 0rem 0;
+}
+
+.team-member p {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .team-member {
+        width: 48%;
+    }
+}
+
+@media (max-width: 500px) {
+    .team-member {
+        width: 100%;
+    }
+}
+
+#lightgallery {
+    margin: 20px 0;
+}
+
+#lightgallery a {
+    width: 240px;
+    margin: 5px;
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    display: block;
+}
+
+#lightgallery a:hover {
+    transform: scale(1.03);
+    z-index: 2;
+}
+
+#lightgallery img,
+#lightgallery video {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+}
+
+#lightgallery video {
+    pointer-events: none;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    #lightgallery a {
+        width: 200px;
+        /* margin: 8px; */
+    }
+}
+
+@media (max-width: 480px) {
+    #lightgallery a {
+        width: 160px;
+    }
+}
