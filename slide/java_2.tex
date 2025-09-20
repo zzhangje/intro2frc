@@ -1,0 +1,1160 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A Beamer template for HKUST                        %
+% Based on THU beamer theme                          %
+% Author: Yuxuan HU                                  %
+% Date: Aug 2024                                     %
+% LPPL Licensed.                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[serif, aspectratio=169]{beamer}
+%\documentclass[serif]{beamer}  % for 4:3 ratio
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{fourier} % see "http://faq.ktug.org/wiki/uploads/MathFonts.pdf" for other options
+\usepackage{hyperref}
+\usepackage{latexsym,amsmath,xcolor,multicol,booktabs,calligra}
+\usepackage{graphicx,pstricks,listings,stackengine}
+\usepackage{lipsum}
+
+\author{Zirui Zhang}
+\title{Java Syntax \& Data Types}
+\subtitle{Programming with Java: Session 2}
+\institute{
+    Tornado Engineering Club \\
+    Jinan Foreign Language School
+}
+\date{\small \today}
+\usepackage{style}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% defs
+\def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
+\def\env#1{\texttt{\color{blue}\footnotesize #1}}
+% set colors
+\definecolor{hkustyellow}{RGB}{167, 131, 55}
+\definecolor{hkustblue}{RGB}{85, 172, 238}
+\definecolor{hkustred}{RGB}{209, 51, 59}
+\definecolor{halfgray}{rgb}{0.5, 0.5, 0.5}
+
+
+%- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \vspace*{-0.4cm} % Adjusted to avoid overfull \vbox
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[keepaspectratio, width=2.5cm]{pic/tornado.png}
+        \end{center}
+    \end{figure}
+    \vspace{-1.5em}
+    \courtesy{https://liaoxuefeng.com/books/java/}
+\end{frame}
+
+\begin{frame}    
+\tableofcontents[sectionstyle=show,
+subsectionstyle=show/shaded/hide,
+subsubsectionstyle=show/shaded/hide]
+\end{frame}
+
+\section{Basic Structure}
+\begin{frame}[fragile]{Complete Java Program Example}
+\begin{lstlisting}[language=Java]
+/**
+ * Comments for documentation generation
+ */
+public class Hello {
+    public static void main(String[] args) {
+        // Output text to the screen:
+        System.out.println("Hello, world!");
+        /* Multi-line comment start
+        Comment content
+        Comment end */
+    }
+} // End of class definition
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Class Structure in Java}
+\begin{itemize}
+    \item Java is object-oriented → basic unit is a \texttt{class}
+    \item \texttt{class} is a keyword
+    \item Class name follows specific naming conventions
+\end{itemize}
+
+\begin{lstlisting}[language=Java]
+public class Hello { // Class name is Hello
+    // Class body...
+} // End of class definition
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Class Naming Conventions}
+\begin{block}{Good Class Names:}
+\begin{itemize}
+    \item \texttt{Hello}
+    \item \texttt{NoteBook} 
+    \item \texttt{VRPlayer}
+\end{itemize}
+\end{block}
+
+\begin{block}{Bad Class Names:}
+\begin{itemize}
+    \item \texttt{hello} (should start with uppercase)
+    \item \texttt{Good123} (meaningless numbers)
+    \item \texttt{Note\_Book} (avoid underscores)
+    \item \texttt{\_World} (should not start with underscore)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Access Modifiers}
+\begin{itemize}
+    \item \texttt{public} indicates the class is accessible everywhere
+    \item If omitted: program compiles but cannot be executed from command line
+    \item Classes can contain multiple methods
+\end{itemize}
+
+\begin{lstlisting}[language=Java]
+public class Hello {
+    public static void main(String[] args) {
+        // Method code...
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Method Structure}
+\begin{itemize}
+    \item Methods define execution statements
+    \item Code executes sequentially
+    \item \texttt{main} method is the program entry point
+    \item \texttt{void} indicates no return value
+    \item \texttt{static} indicates a static method
+\end{itemize}
+
+\begin{lstlisting}[language=Java]
+public static void main(String[] args) {
+    System.out.println("Hello, world!");
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Method Naming Conventions}
+\begin{block}{Good Method Names:}
+\begin{itemize}
+    \item \texttt{main}
+    \item \texttt{goodMorning}
+    \item \texttt{playVR}
+\end{itemize}
+\end{block}
+
+\begin{block}{Bad Method Names:}
+\begin{itemize}
+    \item \texttt{Main} (should start with lowercase)
+    \item \texttt{good123} (meaningless numbers)
+    \item \texttt{good\_morning} (avoid underscores)
+    \item \texttt{\_playVR} (should not start with underscore)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Statements and Syntax}
+\begin{itemize}
+    \item Statements are executable code
+    \item Each statement must end with a semicolon
+    \item Statements execute in sequence
+\end{itemize}
+
+\begin{lstlisting}[language=Java]
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello, world!"); // Statement
+        int x = 5; // Another statement
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Comments in Java}
+\begin{block}{Single-line Comments:}
+\begin{lstlisting}[language=Java]
+// This is a single-line comment
+System.out.println("Hello"); // Comment after code
+\end{lstlisting}
+\end{block}
+
+\begin{block}{Multi-line Comments:}
+\begin{lstlisting}[language=Java]
+/*
+This is a multi-line comment
+that spans multiple lines
+*/
+\end{lstlisting}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Documentation Comments}
+\begin{itemize}
+    \item Special multi-line comments for documentation
+    \item Start with \texttt{/**} and end with \texttt{*/}
+    \item Used to generate automatic documentation
+    \item Place before class/method definitions
+\end{itemize}
+
+\begin{lstlisting}[language=Java]
+/**
+ * Class description for documentation
+ * 
+ * @author Developer Name
+ * @version 1.0
+ */
+public class Hello {
+    // Class implementation...
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]{Code Formatting}
+\begin{itemize}
+    \item Java is flexible with whitespace
+    \item Extra spaces/line breaks don't affect compilation
+    \item Follow community coding conventions
+    \item Use IDE formatting tools (Eclipse: \texttt{Ctrl+Shift+F})
+    \item Consistent formatting improves readability
+\end{itemize}
+
+\begin{block}{IDE Settings:}
+\texttt{Java → Code Style} in Eclipse preferences
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Summary}
+\begin{itemize}
+    \item Java programs are organized in classes
+    \item \texttt{main} method is the entry point
+    \item Follow naming conventions for classes and methods
+    \item Use proper comments for documentation
+    \item Maintain consistent code formatting
+    \item Statements must end with semicolons
+\end{itemize}
+\end{frame}
+
+\section{Variables \& Data Types}
+\begin{frame}[fragile]
+\frametitle{What is a Variable?}
+\begin{itemize}
+    \item A concept from algebra (e.g., `x`, `y` in equations).
+    \item In Java, variables are divided into two types:
+    \begin{itemize}
+        \item Primitive type variables
+        \item Reference type variables
+    \end{itemize}
+\end{itemize}
+\begin{lstlisting}[language=Java]
+// Example equation in algebra:
+y = x^2 + 1
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Defining Variables}
+\begin{itemize}
+    \item Variables must be defined before use.
+    \item Can assign an initial value during definition.
+    \item If no initial value, assigned a default value (usually `0`).
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int x = 1; // Define an int variable x with initial value 1
+
+// Example: Define and print a variable
+public class Main {
+    public static void main(String[] args) {
+        int x = 100;
+        System.out.println(x); // Prints 100
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reassigning Variables}
+\begin{itemize}
+    \item Variables can be reassigned new values.
+    \item Do not specify the type again when reassigning.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int x = 100; // Define with initial value
+        System.out.println(x); // Prints 100
+        x = 200;     // Reassign (no 'int' here)
+        System.out.println(x); // Prints 200
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Assigning Between Variables}
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int n = 100;
+        System.out.println("n = " + n); // n = 100
+
+        n = 200;
+        System.out.println("n = " + n); // n = 200
+
+        int x = n; // Assign n's value (200) to x
+        System.out.println("x = " + x); // x = 200
+
+        x = x + 100; // x becomes 300
+        System.out.println("x = " + x); // x = 300
+        System.out.println("n = " + n); // n = 200
+   }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Memory Representation}
+    % Variables correspond to memory locations and assignment writes a value to that location.
+    \vspace{-1.8em}
+    \begin{columns}
+    \begin{column}{0.5\textwidth}
+\begin{verbatim}
+Step 1: int n = 100;
+      n
+      |
+      v
++---+---+---+---+---+---+---+
+|   |100|   |   |   |   |   |
++---+---+---+---+---+---+---+
+
+Step 2: n = 200;
+      n
+      |
+      v
++---+---+---+---+---+---+---+
+|   |200|   |   |   |   |   |
++---+---+---+---+---+---+---+
+\end{verbatim}
+
+    \end{column}
+    \begin{column}{0.5\textwidth}
+\begin{verbatim}
+Step 3: int x = n;
+      n           x
+      |           |
+      v           v
++---+---+---+---+---+---+---+
+|   |200|   |   |200|   |   |
++---+---+---+---+---+---+---+
+
+Step 4: x = x + 100;
+      n           x
+      |           |
+      v           v
++---+---+---+---+---+---+---+
+|   |200|   |   |300|   |   |
++---+---+---+---+---+---+---+
+\end{verbatim}
+    \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Primitive Data Types}
+\begin{itemize}
+    \item Types the CPU can directly operate on.
+    \item Java defines:
+    \begin{itemize}
+        \item Integer types: `byte`, `short`, `int`, `long`
+        \item Floating-point types: `float`, `double`
+        \item Character type: `char`
+        \item Boolean type: `boolean`
+    \end{itemize}
+\end{itemize}
+\begin{center}
+% \includegraphics[width=0.8\textwidth]{data-types-memory.png} % Note: You would need to create this image
+\end{center}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Integer Types}
+\begin{itemize}
+    \item Ranges:
+    \begin{itemize}
+        \item `byte`: -128 ~ 127
+        \item `short`: -32768 ~ 32767
+        \item `int`: -2147483648 ~ 2147483647
+        \item `long`: -9223372036854775808 ~ 9223372036854775807
+    \end{itemize}
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int i = 2147483647;
+int i2 = -2147483648;
+int i3 = 2_000_000_000; // Underscores for readability
+int i4 = 0xff0000;      // Hex: 16711680
+int i5 = 0b1000000000;  // Binary: 512
+
+long n1 = 9000000000000000000L; // Requires L suffix
+long n2 = 900;        // OK, int 900 assigned to long
+int i6 = 900L;        // Error: Cannot assign long to int
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Floating-Point Types}
+\begin{itemize}
+    \item Numbers with a decimal point (or scientific notation).
+    \item `float` requires an `f` suffix.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+float f1 = 3.14f;
+float f2 = 3.14e38f; // 3.14 x 10^38
+float f3 = 1.0;      // Error: 1.0 is a double
+
+double d = 1.79e308;
+double d2 = -1.79e308;
+double d3 = 4.9e-324; // 4.9 x 10^-324
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Boolean Type}
+\begin{itemize}
+    \item Only two values: `true` and `false`.
+    \item Often the result of relational operations.
+    \item Stored as 4-byte integers in the JVM.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+boolean b1 = true;
+boolean b2 = false;
+boolean isGreater = 5 > 3; // true
+int age = 12;
+boolean isAdult = age >= 18; // false
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Character Type}
+\begin{itemize}
+    \item Represents a single character.
+    \item Uses single quotes `'`.
+    \item Can represent Unicode characters.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        char a = 'A';
+        char zh = '\u4E2D';
+        System.out.println(a);   // A
+        System.out.println(zh);  // \u4E2D
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Reference Types}
+\begin{itemize}
+    \item All non-primitive types are reference types.
+    \item Store an address pointing to an object in memory.
+    \item `String` is a common reference type.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+String s = "hello"; // s is a reference type variable
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Constants}
+\begin{itemize}
+    \item Defined with the `final` modifier.
+    \item Cannot be reassigned after initialization.
+    \item Use uppercase names by convention.
+    \item Avoid "magic numbers" in code.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+final double PI = 3.14; // Constant
+double r = 5.0;
+double area = PI * r * r;
+PI = 300; // Compile error!
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{The `var` Keyword}
+\begin{itemize}
+    \item Lets the compiler infer the variable type.
+    \item Makes code less verbose.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+// Without var
+StringBuilder sb = new StringBuilder();
+
+// With var
+var sb = new StringBuilder(); // Compiler infers StringBuilder
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Variable Scope}
+\begin{itemize}
+    \item Scope is defined by `{ ... }` blocks.
+    \item Variable is accessible from its point of definition to the end of its block.
+    \item Minimize variable scope.
+    \item Avoid reusing variable names in nested scopes.
+\end{itemize}
+\begin{lstlisting}[language=Java]
+{
+    int i = 0;
+    {
+        int x = 1;
+        {
+            String s = "hello";
+        } // s scope ends
+        String s = "hi"; // OK, different variable
+    } // x and s scope end
+} // i scope ends
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{itemize}
+    \item Two variable types: \textbf{primitive} and \textbf{reference}.
+    \item Primitive types: integers, floats, booleans, characters.
+    \item Variables can be \textbf{reassigned}. `=` is assignment, not equality.
+    \item \textbf{Constants} (`final`) cannot be reassigned.
+    \item Use \textbf{`var`} for cleaner code when the type is obvious.
+    \item Define variables in the \textbf{smallest possible scope}.
+\end{itemize}
+\end{frame}
+
+\section{Integer Operations}
+\begin{frame}[fragile]
+\frametitle{Integer Operations}
+\begin{itemize}
+    \item Follow arithmetic rules with nested parentheses
+    \item Integer operations are always exact
+\end{itemize}
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int i = (100 + 200) * (99 - 88); // 3300
+        int n = 7 * (5 + (i - 9)); // 23072
+        System.out.println(i);
+        System.out.println(n);
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Division and Remainder}
+\begin{itemize}
+    \item Integer division yields integer part only
+    \item Remainder operation uses `\%`
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int x = 12345 / 67; // 184
+int y = 12345 \% 67; // 17 (remainder)
+
+// Division by zero causes runtime error
+int z = 100 / 0; // ArithmeticException
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Overflow}
+\begin{itemize}
+    \item Occurs when result exceeds integer range
+    \item No error thrown, produces unexpected results
+\end{itemize}
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int x = 2147483640;
+        int y = 15;
+        int sum = x + y;
+        System.out.println(sum); // -2147483641
+    }
+}
+\end{lstlisting}
+Use \texttt{long} for larger range:
+\begin{lstlisting}[language=Java]
+long x = 2147483640;
+long y = 15;
+long sum = x + y; // 2147483655
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Compound Assignment Operators}
+\begin{itemize}
+    \item Shorthand operators for common operations
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int n = 3300;
+n += 100; // n = n + 100; -> 3400
+n -= 100; // n = n - 100; -> 3300
+n *= 2;   // n = n * 2;   -> 6600
+n /= 3;   // n = n / 3;   -> 2200
+n %= 100; // n = n % 100; -> 0
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Increment/Decrement Operators}
+\begin{itemize}
+    \item \texttt{++} increments, \texttt{--} decrements
+    \item Position matters: prefix vs postfix
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int n = 3300;
+n++; // 3301 (postfix: use then increment)
+++n; // 3302 (prefix: increment then use)
+
+int a = n++; // a = 3302, n = 3303
+int b = ++n; // n = 3304, b = 3304
+
+// Avoid complex expressions with ++/--
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Bitwise Shift Operations}
+\begin{itemize}
+    \item Left shift: \texttt{\textless{}\textless{}}, Right shift: \texttt{\textgreater{}\textgreater{}}
+    \item Unsigned right shift: \texttt{\textgreater{}\textgreater{}\textgreater{}}
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int n = 7;       // 00000111 = 7
+int a = n << 1;  // 00001110 = 14
+int b = n << 2;  // 00011100 = 28
+int c = n >> 1;  // 00000011 = 3
+int d = n >> 2;  // 00000001 = 1
+
+int neg = -536870912;
+int e = neg >> 1;  // preserves sign bit
+int f = neg >>> 1; // fills with 0
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Bitwise Operations}
+\begin{itemize}
+    \item AND: \texttt{\&}, OR: \texttt{|}, NOT: \texttt{\~}, XOR: \texttt{\^}
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int i = 167776589; // 00001010 00000000 00010001 01001101
+int n = 167776512; // 00001010 00000000 00010001 00000000
+
+int and = i & n;   // 167776512
+int or = i | n;    // 167776589  
+int xor = i ^ n;   // 77
+int not = ~i;      // -167776590
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Operator Precedence}
+\begin{itemize}
+    \item Highest: \texttt{()}
+    \item \texttt{!}, \texttt{\~}, \texttt{++}, \texttt{--}
+    \item \texttt{*}, \texttt{/}, \texttt{\%}
+    \item \texttt{+}, \texttt{-}
+    \item \texttt{<<}, \texttt{>>}, \texttt{>>>}
+    \item \texttt{\&}
+    \item \texttt{|}
+    \item Lowest: \texttt{+=}, \texttt{-=}, \texttt{*=}, \texttt{/=}
+\end{itemize}
+\begin{lstlisting}[language=Java]
+// Use parentheses for clarity
+int result = (a + b) * (c - d) / e;
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Type Promotion and Casting}
+\begin{itemize}
+    \item Operations promote to larger type
+    \item Explicit casting may cause data loss
+\end{itemize}
+\begin{lstlisting}[language=Java]
+short s = 1234;
+int i = 123456;
+int x = s + i; // promoted to int
+// short y = s + i; // compilation error
+
+short y = (short)(s + i); // explicit cast
+// Risk of incorrect results if value too large
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Casting Risks}
+\begin{itemize}
+    \item Casting large values produces unexpected results
+\end{itemize}
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int i1 = 1234567;
+        short s1 = (short) i1; // -10617
+        System.out.println(s1);
+        
+        int i2 = 12345678;
+        short s2 = (short) i2; // 24910
+        System.out.println(s2);
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Sum of First N Numbers}
+Calculate sum using formula: $\frac{(1+N) \times N}{2}$
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int n = /*TODO*/;
+        int sum = /*TODO*/;
+        System.out.println(sum); // 5050
+        System.out.println(sum == 5050 ? 
+            "Test passed" : "Test failed");
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Sum of First N Numbers (Cont.)}
+Calculate sum using formula: $\frac{(1+N) \times N}{2}$
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int n = 100;
+        int sum = (1 + n) * n / 2;
+        System.out.println(sum); // 5050
+        System.out.println(sum == 5050 ? 
+            "Test passed" : "Test failed");
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{itemize}
+    \item Integer operations are precise but watch for overflow
+    \item Use appropriate types (\texttt{int} vs \texttt{long})
+    \item Compound assignment operators simplify code
+    \item Be careful with casting and type promotion
+    \item Use parentheses for complex expressions
+    \item Avoid \texttt{byte}/\texttt{short} for arithmetic unless necessary
+\end{itemize}
+\end{frame}
+
+\section{Float Operations}
+\begin{frame}[fragile]
+\frametitle{Floating Point Characteristics}
+\begin{itemize}
+    \item Limited operations: +, -, *, /
+    \item Cannot perform bitwise or shift operations
+    \item Often cannot be represented precisely
+\end{itemize}
+\begin{lstlisting}[language=Java]
+// Precision issues
+double x = 1.0 / 10;    // 0.1 (approximately)
+double y = 1 - 9.0 / 10; // 0.1 (approximately)
+System.out.println(x);   // 0.1
+System.out.println(y);   // 0.09999999999999998
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Comparing Floating Point Numbers}
+\begin{itemize}
+    \item Never use == for floating point comparison
+    \item Compare absolute difference against threshold
+\end{itemize}
+\begin{lstlisting}[language=Java]
+double x = 1.0 / 10;
+double y = 1 - 9.0 / 10;
+
+double diff = Math.abs(x - y);
+if (diff < 0.00001) {
+    System.out.println("Equal");
+} else {
+    System.out.println("Not equal");
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Type Promotion}
+\begin{itemize}
+    \item Integers automatically promoted to floating point
+    \item Watch for integer division in mixed expressions
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int n = 5;
+double d1 = 1.2 + 24.0 / n; // 6.0
+double d2 = 1.2 + 24 / n;   // 5.2
+
+System.out.println(d1);
+System.out.println(d2);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Special Values}
+\begin{itemize}
+    \item Division by zero returns special values
+    \item No exception thrown
+\end{itemize}
+\begin{lstlisting}[language=Java]
+double d1 = 0.0 / 0;   // NaN
+double d2 = 1.0 / 0;   // Infinity
+double d3 = -1.0 / 0;  // -Infinity
+
+System.out.println(d1); // NaN
+System.out.println(d2); // Infinity
+System.out.println(d3); // -Infinity
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Explicit Casting}
+\begin{itemize}
+    \item Fractional part discarded during casting
+    \item Values beyond range return max integer
+    \item Add 0.5 for rounding
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int n1 = (int) 12.3;   // 12
+int n2 = (int) 12.7;   // 12
+int n3 = (int) -12.7;  // -12
+int n4 = (int) 1.2e20; // 2147483647
+
+// Rounding
+double d = 2.6;
+int rounded = (int) (d + 0.5); // 3
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Quadratic Equation}
+Solve $ax^2 + bx + c = 0$ using quadratic formula:
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        double a = 1.0, b = 3.0, c = -4.0;
+        // TODO: Calculate roots
+        double r1 = 0;
+        double r2 = 0;
+        
+        System.out.println(r1); // 1.0
+        System.out.println(r2); // -4.0
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Quadratic Equation (Cont.)}
+Solve $ax^2 + bx + c = 0$ using quadratic formula:
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        double a = 1.0, b = 3.0, c = -4.0;
+        double discriminant = b * b - 4 * a * c;
+        double r1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+        double r2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+        
+        System.out.println(r1); // 1.0
+        System.out.println(r2); // -4.0
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{itemize}
+    \item Floating point numbers often cannot be represented precisely, and their arithmetic results may have errors.
+    \item To compare two floating point numbers, compare the absolute value of their difference against a specific threshold.
+    \item When integers and floating point numbers are involved in arithmetic, integers are automatically promoted to floating point numbers.
+    \item Floating point numbers can be explicitly cast to integers, but values exceeding the range will always return the maximum integer value.
+\end{itemize}
+\end{frame}
+
+\section{Boolean Operations}
+\begin{frame}[fragile]
+\frametitle{Boolean Operators}
+\begin{itemize}
+    \item Comparison: $>$, $>=$, $<$, $<=$, $==$, $!=$
+    \item Logical: $\&\&$ (AND), $||$ (OR), $!$ (NOT)
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int age = 12;
+boolean isGreater = 5 > 3;        // true
+boolean isZero = age == 0;        // false
+boolean isNonZero = !isZero;      // true
+boolean isAdult = age >= 18;      // false
+boolean isTeen = age > 6 && age < 18; // true
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Short-Circuit Evaluation}
+\begin{itemize}
+    \item Stops evaluating when result is determined
+    \item Prevents unnecessary computations
+\end{itemize}
+\begin{lstlisting}[language=Java]
+boolean b = 5 < 3; // false
+// Division by zero avoided due to short-circuit
+boolean result = b && (5 / 0 > 0);
+System.out.println(result); // false
+
+// This would throw ArithmeticException
+// boolean result2 = true && (5 / 0 > 0);
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Ternary Operator}
+\begin{itemize}
+    \item Syntax: condition ? expr1 : expr2
+    \item Returns expr1 if true, expr2 if false
+\end{itemize}
+\begin{lstlisting}[language=Java]
+int n = -100;
+int x = n >= 0 ? n : -n; // Absolute value
+System.out.println(x); // 100
+
+// Types must match
+String result = n > 0 ? "positive" : "negative";
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Primary Student Check}
+Check if age is 6-12 years:
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int age = 7;
+        boolean isPrimaryStudent = ???;
+        System.out.println(isPrimaryStudent ? "Yes" : "No");
+    }
+}
+\end{lstlisting}
+\end{frame}
+\begin{frame}[fragile]
+\frametitle{Exercise: Primary Student Check (Cont.)}
+Check if age is 6-12 years:
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int age = 7;
+        boolean isPrimaryStudent = age >= 6 && age <= 12;
+        System.out.println(isPrimaryStudent ? "Yes" : "No");
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{itemize}
+    \item AND and OR operations are short-circuit operations.
+    \item The ternary operation \texttt{b ? x : y} requires the types of \texttt{x} and \texttt{y} to be the same.
+    \item The ternary operation is also a "short-circuit operation," evaluating only \texttt{x} or \texttt{y}.
+\end{itemize}
+\end{frame}
+
+\section{Characters and Strings}
+\begin{frame}[fragile]
+\frametitle{Character Type (char)}
+\begin{itemize}
+    \item Primitive type, holds single Unicode character
+    \item 2 bytes per character
+\end{itemize}
+\begin{lstlisting}[language=Java]
+char c1 = 'A';
+char c2 = '\u4e2d'; // Chinese character
+
+int n1 = 'A';  // 65
+int n2 = '\u4e2d'; // 20013
+
+System.out.println(c1); // A
+System.out.println(n2); // 20013
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{String Type (String)}
+\begin{itemize}
+    \item Reference type, uses double quotes
+    \item Escape sequences for special characters
+\end{itemize}
+\begin{lstlisting}[language=Java]
+String s1 = ""; // Empty string
+String s2 = "A"; // 1 character
+String s3 = "ABC"; // 3 characters
+
+// Escape sequences
+String s4 = "abc\"xyz"; // Contains: a, b, c, ", x, y, z
+String s5 = "abc\\xyz"; // Contains: a, b, c, \, x, y, z
+String s6 = "Line1\nLine2"; // Newline
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{String Concatenation}
+\begin{itemize}
+    \item + operator automatically converts types
+    \item Other types converted to strings
+\end{itemize}
+\begin{lstlisting}[language=Java]
+String s1 = "Hello";
+String s2 = "world";
+String s = s1 + " " + s2 + "!"; // Hello world!
+
+int age = 25;
+String info = "Age: " + age; // Age: 25
+
+double pi = 3.14159;
+String msg = "PI = " + pi; // PI = 3.14159
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Multi-line Strings (Text Blocks)}
+\begin{itemize}
+    \item Java 13+ feature using """..."""
+    \item Common leading spaces removed
+\end{itemize}
+\begin{lstlisting}[language=Java]
+String query = """
+               SELECT * FROM users
+               WHERE age > 18
+               ORDER BY name
+               """;
+
+// Equivalent to:
+String oldStyle = "SELECT * FROM users\n" +
+                  "WHERE age > 18\n" +
+                  "ORDER BY name";
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{String Immutability}
+\begin{itemize}
+    \item String content cannot be changed
+    \item Variables can reference different strings
+\end{itemize}
+\begin{lstlisting}[language=Java]
+String s = "hello";
+String t = s;       // t references "hello"
+s = "world";        // s now references "world"
+
+System.out.println(t); // hello (unchanged)
+System.out.println(s); // world
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Null vs Empty String}
+\begin{itemize}
+    \item null: no object reference
+    \item "": empty string object
+\end{itemize}
+\begin{lstlisting}[language=Java]
+String s1 = null;    // No string object
+String s2 = "";      // Empty string object
+String s3 = s1;      // Also null
+
+System.out.println(s1 == null); // true
+System.out.println(s2.isEmpty()); // true
+// System.out.println(s1.isEmpty()); // NullPointerException
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Unicode to String}
+Convert Unicode codes to string:
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int a = 72;    // 'H'
+        int b = 105;   // 'i'
+        int c = 65281; // '!'
+        // FIXME:
+        String s = a + b + c;
+        System.out.println(s); // Hi!
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Exercise: Unicode to String (Cont.)}
+Convert Unicode codes to string:
+\begin{lstlisting}[language=Java]
+public class Main {
+    public static void main(String[] args) {
+        int a = 72;    // 'H'
+        int b = 105;   // 'i'
+        int c = 65281; // '!'
+        
+        String s = "" + (char)a + (char)b + (char)c;
+        System.out.println(s); // Hi!
+    }
+}
+\end{lstlisting}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Summary}
+\begin{itemize}
+    \item Java's character type `char` is a primitive type, while the string type `String` is a reference type.
+    \item Primitive type variables "hold" a value, while reference type variables "point to" an object.
+    \item Reference type variables can be null.
+    \item Distinguish between the null value `null` and the empty string `""`.
+\end{itemize}
+\end{frame}
+
+\end{document}

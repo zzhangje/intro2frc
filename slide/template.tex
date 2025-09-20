@@ -1,0 +1,81 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% A Beamer template for HKUST                 %
+% Based on THU beamer theme                          %
+% Author: Yuxuan HU                                  %
+% Date: Aug 2024                                    %
+% LPPL Licensed.                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\documentclass[serif, aspectratio=169]{beamer}
+%\documentclass[serif]{beamer}  % for 4:3 ratio
+\usepackage[T1]{fontenc} 
+\usepackage{fourier} % see "http://faq.ktug.org/wiki/uploads/MathFonts.pdf" for other options
+\usepackage{hyperref}
+\usepackage{latexsym,amsmath,xcolor,multicol,booktabs,calligra}
+\usepackage{graphicx,pstricks,listings,stackengine}
+\usepackage{lipsum}
+
+\author{Zirui Zhang}
+\title{Kalman Filter in Three Ways}
+\subtitle{Geometric, Probabilistic, and Optimization Perspectives}
+\institute{
+    % zzhangje@connect.ust.hk \\
+    Cheng Kar-Shun Robotics Institute \\
+    The Hong Kong University of Science and Technology \\
+}
+\date{\small \today}
+\usepackage{style}
+
+% defs
+\def\cmd#1{\texttt{\color{red}\footnotesize $\backslash$#1}}
+\def\env#1{\texttt{\color{blue}\footnotesize #1}}
+% set colors
+\definecolor{hkustyellow}{RGB}{167, 131, 55}
+\definecolor{hkustblue}{RGB}{85, 172, 238}
+\definecolor{hkustred}{RGB}{209, 51, 59}
+
+
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries\color{deepblue},
+    emphstyle=\ttfamily\color{deepred},    % Custom highlighting style
+    stringstyle=\color{deepgreen},
+    numbers=left,
+    numberstyle=\small\color{halfgray},
+    rulesepcolor=\color{red!20!green!20!blue!20},
+    frame=shadowbox,
+}
+
+%- --- --- --- --- --- --- --- --- --- --- --- --- --- --- --- 
+\begin{document}
+
+\begin{frame}
+    \titlepage
+    \vspace*{-0.6cm}
+    \begin{figure}[htpb]
+        \begin{center}
+            \includegraphics[keepaspectratio, width=2.5cm]{pic/tornado.png}
+        \end{center}
+    \end{figure}
+\end{frame}
+
+\begin{frame}    
+\tableofcontents[sectionstyle=show,
+subsectionstyle=show/shaded/hide,
+subsubsectionstyle=show/shaded/hide]
+\end{frame}
+
+\section{Introduction}
+
+% --- Thank you slide ---
+\begin{frame}
+\begin{center}
+{ Thank you for listening !}
+\vspace{1cm}
+
+Zirui Zhang \\[1em]
+% zzhangje@connect.ust.hk
+\end{center}
+\end{frame}
+
+\end{document}
