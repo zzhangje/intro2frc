@@ -23,15 +23,6 @@ This project-based course guides students through the full development of a comp
       Fitzwilliam College<br>Univ. of Cambridge
     </p>
   </div>
-
-  <div class="team-member" style="text-align: center; width: 32%; display: flex; flex-direction: column; align-items: center;">
-    <img src="/icon/jerry.jpg" alt="Zirui Zhang" style="height: 90px; width: 90px; object-fit: contain; border-radius: 8px;" />
-    <h4 style="margin: 0.5rem 0 0.2rem 0;">Zirui Zhang</h4>
-    <p style="margin: 0; text-align: center;">
-      <a href="https://zhangzrjerry.github.io" target="_blank">zhangzrjerry.github.io</a><br />
-      CKS Robotics Institute<br> HKUST
-    </p>
-  </div>
 </div>
 
 ## **Learning Objectives**
